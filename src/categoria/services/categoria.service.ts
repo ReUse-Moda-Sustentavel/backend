@@ -5,15 +5,10 @@ import { Categoria } from "../entities/categoria.entity";
 
 @Injectable()
 export class CategoriaService{
-    findByGenero(genero: string): Promise<Categoria[]> {
-        throw new Error("Method not implemented.");
-    }
-
     constructor(
         @InjectRepository(Categoria)
-        private categoriaRepository: Repository<Categoria>,
-        private categoriaService: CategoriaService
-    ) { }
+        private categoriaRepository: Repository<Categoria>
+    ){}
 
     async findAll(): Promise<Categoria[]> {
         return await this.categoriaRepository.find()
@@ -36,6 +31,14 @@ export class CategoriaService{
         return await this.categoriaRepository.find({
             where: {
                 nome: ILike(`%${nome}%`)
+            }
+        })
+    }
+
+    async findByGenero(genero: string): Promise<Categoria[]> {
+        return await this.categoriaRepository.find({
+            where: {
+                genero: ILike(`%${genero}%`)
             }
         })
     }
