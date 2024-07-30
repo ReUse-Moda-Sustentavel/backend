@@ -11,15 +11,17 @@ export class CategoriaService{
     ){}
 
     async findAll(): Promise<Categoria[]> {
-        return await this.categoriaRepository.find()
+        return await this.categoriaRepository.find({
+            relations: { produto: true },
+        })
+        
     }
 
     async findById(id: number): Promise<Categoria>{
 
         let categoria = await this.categoriaRepository.findOne({
-            where: {
-                id
-            }
+            where: {id},
+            relations: { produto: true },
         })
 
         if (!categoria)
@@ -29,17 +31,15 @@ export class CategoriaService{
 
     async findByNome(nome: string): Promise<Categoria[]> {
         return await this.categoriaRepository.find({
-            where: {
-                nome: ILike(`%${nome}%`)
-            }
+            where: {nome: ILike(`%${nome}%`)},
+            relations: { produto: true },
         })
     }
 
     async findByGenero(genero: string): Promise<Categoria[]> {
         return await this.categoriaRepository.find({
-            where: {
-                genero: ILike(`%${genero}%`)
-            }
+            where: {genero: ILike(`%${genero}%`)},
+            relations: { produto: true },
         })
     }
 
@@ -52,7 +52,7 @@ export class CategoriaService{
         await this.findById(categoria.id);
 
         if (!categoria.id)
-            throw new HttpException('Necessário passar ID da categoria a ser atualizado!', HttpStatus.NOT_FOUND);
+            throw new HttpException('Necessário passar ID da categoria a ser atualizada!', HttpStatus.NOT_FOUND);
         return await this.categoriaRepository.save(categoria);
     }
 
