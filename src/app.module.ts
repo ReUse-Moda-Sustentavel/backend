@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Categoria } from './categoria/entities/categoria.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { Produto } from './produto/entities/produto.entity';
 import { ProdutoModule } from './produto/produto.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { Usuario } from './usuario/entities/usuario.entity';
 
 @Module({
   imports: [
@@ -14,14 +15,16 @@ import { ProdutoModule } from './produto/produto.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'A0m1a4n7d0a0',
+      password: 'root',
       database: 'db_brecho_reuse',
-      entities: [Categoria, Produto],
+      entities: [Categoria, Produto, Usuario],
       synchronize: true,
       logging: true,
     }),
     CategoriaModule,
-    ProdutoModule
+    ProdutoModule,
+    AuthModule,
+    UsuarioModule,
   ],
   controllers: [],
   providers: [],

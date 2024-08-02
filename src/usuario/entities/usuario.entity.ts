@@ -1,10 +1,12 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Produto } from "../../produto/entities/produto.entity";
 
 
 @Entity({ name: "tb_usuarios" })
 export class Usuario {
+   
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -32,4 +34,7 @@ export class Usuario {
     @Column({length: 255, nullable: false})
     @Transform(({ value }: TransformFnParams) => value?.trim())
     tipoUsuario: string;
+   
+    @OneToMany(() => Produto, (produto) => produto.usuario)
+    produto: Produto []
 }
