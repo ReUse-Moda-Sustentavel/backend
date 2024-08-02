@@ -11,7 +11,10 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @Post('/logar')
     async login(@Body() user: UsuarioLogin): Promise<any> {
+        console.log("hiiiiiiii");
+        
+        console.log(user);
+        
         return this.authService.login(user);
     }
-
 }

@@ -13,7 +13,7 @@ export class Usuario {
     @IsNotEmpty()
     @Column({length: 255, nullable: false})
     @Transform(({ value }: TransformFnParams) => value?.trim())
-    conta: string;
+    usuario: string;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false})

@@ -16,7 +16,7 @@ export class UsuarioService {
     async findByUsuario(usuario: string): Promise<Usuario | undefined> {
         return await this.usuarioRepository.findOne({
             where: {
-                conta: usuario
+                usuario: usuario
             }
         })
     }
@@ -52,7 +52,7 @@ export class UsuarioService {
  
     async create(usuario: Usuario): Promise<Usuario> {
        
-        let buscaUsuario = await this.findByUsuario(usuario.conta);
+        let buscaUsuario = await this.findByUsuario(usuario.usuario);
  
         if (!buscaUsuario) {
             usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
@@ -66,7 +66,7 @@ export class UsuarioService {
     async update(usuario: Usuario): Promise<Usuario> {
  
         let updateUsuario: Usuario = await this.findById(usuario.id);
-        let buscaUsuario = await this.findByUsuario(usuario.conta);
+        let buscaUsuario = await this.findByUsuario(usuario.usuario);
  
         if (!updateUsuario)
             throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
