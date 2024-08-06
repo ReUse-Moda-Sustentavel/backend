@@ -22,7 +22,7 @@ export class Categoria {
     @ApiProperty()
     genero: string;
 
-    @ApiProperty()s
+    @ApiProperty()
     @OneToMany(() => Produto, (produto) => produto.categoria)
     produto: Produto[]
 }
