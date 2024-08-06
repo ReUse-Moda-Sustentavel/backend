@@ -7,12 +7,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('Reuse Moda Sustentável')
-  .setDescription('Projeto Reuse Moda Sustentável')
-  .setContact("Generation Brasil","github.com/ReUse-Moda-Sustentavel","reusemodasustentavelgen@gmail.com")
-  .setVersion('1.0')
-  .addBearerAuth()
-  .build();
+    .setTitle('Reuse Moda Sustentável')
+    .setDescription('Projeto Reuse Moda Sustentável')
+    .setContact("Generation Brasil", "github.com/ReUse-Moda-Sustentavel", "reusemodasustentavelgen@gmail.com")
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
 
@@ -22,6 +22,6 @@ async function bootstrap() {
 
   app.enableCors();
 
-  await app.listen(4000);
+  await app.listen(process.env.PORT || 4000);
 }
 bootstrap(); //teste
