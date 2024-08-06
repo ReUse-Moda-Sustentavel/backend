@@ -7,6 +7,7 @@ import { ProdutoModule } from './produto/produto.module';
 import { AuthModule } from './auth/auth.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { Usuario } from './usuario/entities/usuario.entity';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: 'root123',
       database: 'db_brecho_reuse',
       entities: [Categoria, Produto, Usuario],
       synchronize: true,
@@ -26,7 +27,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
     AuthModule,
     UsuarioModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
